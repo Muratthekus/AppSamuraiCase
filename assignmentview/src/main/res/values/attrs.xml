@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="AssignmentImageView">
+
+    </declare-styleable>
+
+    <attr name="assignmentImageView" format="reference"/>
+</resources>
