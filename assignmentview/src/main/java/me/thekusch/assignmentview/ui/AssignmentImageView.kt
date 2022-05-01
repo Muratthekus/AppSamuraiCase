@@ -17,7 +17,7 @@ import java.lang.Exception
 internal class AssignmentImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = R.attr.assignmentImageView
+    defStyleAttr: Int = R.attr.assignmentImageViewStyle
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
 
     private var _loadTime: Long = DEFAULT_LOAD_TIME
@@ -85,7 +85,7 @@ internal class AssignmentImageView @JvmOverloads constructor(
 
     private fun imageLoadLog(resource: String?) {
         val status = if (loadTime == DEFAULT_LOAD_TIME) "FAIL" else "SUCCESS"
-        Log.d(TAG, "Status: $status --> resource: $resource trackedLoadTime: $loadTime")
+        Log.d(TAG, "Status: $status --> resource: $resource trackedLoadTime: $loadTime ms")
     }
 
     companion object {

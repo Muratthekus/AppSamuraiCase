@@ -5,5 +5,6 @@
 
     </declare-styleable>
 
-    <attr name="assignmentImageView" format="reference"/>
+    <attr name="assignmentImageViewStyle" format="reference"/>
+    <attr name="assignmentListViewStyle" format="reference"/>
 </resources>
