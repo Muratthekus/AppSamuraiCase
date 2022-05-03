@@ -14,6 +14,7 @@ import com.bumptech.glide.request.target.Target
 import me.thekusch.assignmentview.R
 import java.lang.Exception
 
+internal typealias ImageLoadListener = ((Long) ->Unit)
 internal class AssignmentImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -26,7 +27,11 @@ internal class AssignmentImageView @JvmOverloads constructor(
         get() = _loadTime
         set(value) {
             _loadTime = value
+            onImageLoad?.invoke(value)
         }
+
+    //listener
+    var onImageLoad: ImageLoadListener? = null
 
     init {
         obtainStyledAttributes(attrs, defStyleAttr)
@@ -60,8 +65,7 @@ internal class AssignmentImageView @JvmOverloads constructor(
                     target: Target<Drawable>?,
                     isFirstResource: Boolean
                 ): Boolean {
-                    // no-op
-                    // load time wil remain same as DEFAULT_LOAD_TIME (-1)
+                    loadTime = DEFAULT_LOAD_TIME
                     imageLoadLog(resourceUrl)
                     return false
                 }
@@ -74,8 +78,10 @@ internal class AssignmentImageView @JvmOverloads constructor(
                     isFirstResource: Boolean
                 ): Boolean {
                     val resultTime = System.currentTimeMillis()
-                    loadTime = resultTime - startTime
-                    imageLoadLog(resourceUrl)
+                    if (dataSource == DataSource.REMOTE || dataSource == DataSource.DATA_DISK_CACHE) {
+                        loadTime = resultTime - startTime
+                        imageLoadLog(resourceUrl)
+                    }
                     return false
                 }
             })
